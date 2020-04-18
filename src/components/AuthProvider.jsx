@@ -17,7 +17,7 @@ export default class AuthProvider extends React.Component {
         this.setState({user})
     }
     login = (email, password) => {
-        authService.login(email, password)
+        return authService.login(email, password)
             .then(response => this.updateCurrentUser(authService.getUserFromStorage()))
     }
     logout = () => {

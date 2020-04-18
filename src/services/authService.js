@@ -3,7 +3,7 @@ import {endpoints} from "../constants/endpoints";
 import jwt_decode from "jwt-decode";
 
 const getUserFromStorage = () => {
-    let token = localStorage.getItem('Jwt token');
+    let token = localStorage.getItem('Token');
     if (!token) return null;
     let data = jwt_decode(token);
     return {
@@ -20,7 +20,7 @@ const afterLogin = response => {
 };
 
 const login = (email, password) => {
-    RestRequest.post(endpoints.getToken,{},{email,password}).then(afterLogin)
+    return RestRequest.post(endpoints.getToken,{},{email,password}).then(afterLogin)
  }
 
  const logout = () => {

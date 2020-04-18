@@ -8,8 +8,8 @@ const method = {
 };
 
 const sendRequest = (method, url, data) => {
-    const Authorization = localStorage.getItem('Token');
-    const headers = {Authorization};
+    const token = localStorage.getItem('Token');
+    const headers = {Authorization:`Bearer ${token}`};
     return Axios.request({method, url, data, headers});
 };
 

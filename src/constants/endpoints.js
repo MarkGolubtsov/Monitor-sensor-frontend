@@ -4,7 +4,7 @@ export const endpoints = {
     getSensor: id => `${serverApiUrl}/sensors/${id}`,
     putSensor: id => `${serverApiUrl}/sensors/${id}`,
     deleteSensor: id => `${serverApiUrl}/sensors/${id}`,
-    getSensors: `${serverApiUrl}/senors`,
+    getSensors: `${serverApiUrl}/sensors`,
     getTypes: `${serverApiUrl}/types`,
     getUnits: `${serverApiUrl}/units`,
     getToken: `${serverApiUrl}/login`
