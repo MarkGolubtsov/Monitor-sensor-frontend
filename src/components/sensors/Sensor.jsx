@@ -13,25 +13,28 @@ export const Sensor = ({sensor, onDelete}) => {
     const authContext = useContext(AuthContext);
     return (
         <>
-            <TableRow key={sensor.name}>
-                <TableCell>
-                    <IconButton>
-                        <Edit/>
-                    </IconButton>
+            <TableRow key={sensor.id}>
+                <TableCell align="center">
+                    {
+                        isAdmin(authContext.currentUser) ?
+                            <IconButton>
+                                <Edit/>
+                            </IconButton> : <React.Fragment/>
+                    }
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell align="center"  >
                     <Tooltip title={sensor.description}>
                         <Typography>
                             {sensor.name}
                         </Typography>
                     </Tooltip>
                 </TableCell>
-                <TableCell align="right">{sensor.model}</TableCell>
-                <TableCell align="right">{sensor.type.name}</TableCell>
-                <TableCell align="right">{`${sensor.rangeFrom} - ${sensor.rangeTo} `}</TableCell>
-                <TableCell align="right">{sensor.unit.name}</TableCell>
-                <TableCell align="right">{sensor.location}</TableCell>
-                <TableCell>
+                <TableCell align="center" >{sensor.model}</TableCell>
+                <TableCell align="center" >{sensor.type.name}</TableCell>
+                <TableCell align="center" >{`${sensor.rangeFrom} - ${sensor.rangeTo} `}</TableCell>
+                <TableCell align="center" >{sensor.unit.name}</TableCell>
+                <TableCell align="center" >{sensor.location}</TableCell>
+                <TableCell align="center" >
                     {
                         isAdmin(authContext.currentUser) ?
                             <IconButton onClick={() => onDelete(sensor.id)} color='secondary'>

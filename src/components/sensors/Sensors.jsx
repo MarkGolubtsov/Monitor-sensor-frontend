@@ -57,6 +57,7 @@ class Sensors extends React.Component {
 
     onSearch = () => {
         const {text, pageSize} = this.state;
+        this.setState({page: 0})
         this.loadData(0, pageSize, text);
     }
 
@@ -87,13 +88,13 @@ class Sensors extends React.Component {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell/>
-                                <TableCell><Typography variant='h5'>Name</Typography></TableCell>
-                                <TableCell align="right"><Typography variant='h5'>Modle</Typography></TableCell>
-                                <TableCell align="right"><Typography variant='h5'>Type</Typography></TableCell>
-                                <TableCell align="right"><Typography variant='h5'>Range</Typography></TableCell>
-                                <TableCell align="right"><Typography variant='h5'>Unit</Typography></TableCell>
-                                <TableCell align="right"><Typography variant='h5'>Location</Typography></TableCell>
+                                <TableCell align="center"/>
+                                <TableCell align="center"><Typography variant='h5'>Name</Typography></TableCell>
+                                <TableCell align="center"><Typography variant='h5'>Mode</Typography></TableCell>
+                                <TableCell align="center"><Typography variant='h5'>Type</Typography></TableCell>
+                                <TableCell align="center"><Typography variant='h5'>Range</Typography></TableCell>
+                                <TableCell align="center"><Typography variant='h5'>Unit</Typography></TableCell>
+                                <TableCell align="center"><Typography variant='h5'>Location</Typography></TableCell>
                                 <TableCell/>
                             </TableRow>
                         </TableHead>
