@@ -5,10 +5,7 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import AuthProvider from "./components/AuthProvider";
 
-ReactDOM.render(
-    <React.StrictMode>
-        <AuthProvider><App/></AuthProvider>
-    </React.StrictMode>,
+ReactDOM.render(<AuthProvider><App/></AuthProvider>,
     document.getElementById('root')
 );
 
