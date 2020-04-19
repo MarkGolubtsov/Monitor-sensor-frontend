@@ -13,14 +13,14 @@ import Editor from "./edited/Editor";
 
 class App extends React.Component {
     render() {
-        let isLogged=!!this.context.currentUser;
+
         return (
             <div>
                 <BrowserRouter>
                     <Navbar/>
                     <Switch>
                         <PrivateRouter exact path={Routes.sensors} component={Sensors}/>
-                        <PrivateRouter onlyForAdmin  path={Routes.sensorEditor} component={Editor}/>
+                        <PrivateRouter exact   path={Routes.sensorEditor} component={Editor} onlyForAdmin={true}/>
                         <OnlyGuestRouter path={Routes.login} component={Login}/>
                         <Redirect to={Routes.login}/>
                     </Switch>
