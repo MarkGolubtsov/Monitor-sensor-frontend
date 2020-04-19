@@ -4,30 +4,25 @@ import Navbar from "./navbar/Navbar";
 import {Routes} from "../constants/routes";
 import {AuthContext} from "./AuthProvider";
 import {Redirect, Route} from "react-router";
-import {PrivateRouter} from "./PrivateRouter";
 import Login from "./login/Login";
 import Sensors from "./sensors/Sensors";
+import {Editor} from "./edited/Editor";
+import {PrivateRouter} from "./PrivateRouter";
+import {OnlyGuestRouter} from "./OnlyGuestRouter";
+
 
 class App extends React.Component {
     render() {
+        let isLogged=!!this.context.currentUser;
         return (
             <div>
                 <BrowserRouter>
                     <Navbar/>
                     <Switch>
-                        {
-                            this.context.currentUser ?
-                                <>
-                                    <Route exact path={Routes.sensors} component={Sensors}/>
-                                    <Redirect to={Routes.sensors}/>
-                                </>
-                                :
-                                <>
-                                    <Route exact path={Routes.login} component={Login}/>
-                                    <Redirect to={Routes.login}/>
-                                </>
-                        }
-
+                        <PrivateRouter exact path={Routes.sensors} component={Sensors}/>
+                        <PrivateRouter onlyForAdmin  path={Routes.sensorEditor} component={Editor}/>
+                        <OnlyGuestRouter path={Routes.login} component={Login}/>
+                        <Redirect to={Routes.login}/>
                     </Switch>
                 </BrowserRouter>
             </div>

@@ -52,7 +52,7 @@ class Sensors extends React.Component {
     };
 
     create = () => {
-        alert('Create')
+        this.props.history.push()
     };
 
     onSearch = () => {
