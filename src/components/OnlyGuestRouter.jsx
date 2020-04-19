@@ -1,6 +1,5 @@
 import {Redirect, Route} from "react-router-dom";
 import authServices from "../services/authService";
-import {isAdmin, isViewer} from "../constants/roles";
 import {Routes} from "../constants/routes";
 import React from "react";
 
