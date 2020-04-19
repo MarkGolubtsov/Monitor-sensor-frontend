@@ -10,15 +10,19 @@ import TableBody from "@material-ui/core/TableBody";
 import {RestRequest} from "../../services/requestServices";
 import {endpoints} from "../../constants/endpoints";
 import Typography from "@material-ui/core/Typography";
-import './style/sensors.css'
+import './style/sensors.scss'
 import Grid from "@material-ui/core/Grid";
 import {isAdmin} from "../../constants/roles";
 import Button from "@material-ui/core/Button";
 import Pagination from '@material-ui/lab/Pagination';
 import TextSearch from "../search/TextSearch";
 import {Sensor} from "./Sensor";
+import {getRouteForCreate, getRouteForUpdate} from "../../helper/routersHelper";
+import {Routes} from "../../constants/routes";
 
 class Sensors extends React.Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -32,17 +36,23 @@ class Sensors extends React.Component {
     }
 
     componentDidMount() {
+        this._isMounted = true;
         const {page, pageSize} = this.state;
         this.loadData(page, pageSize);
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     loadData = (page, pageSize, text = '') => {
         RestRequest.get(endpoints.getSensors, {page, pageSize, text}, {}).then((response) => {
             const {content, totalElements, totalPages} = response.data;
-            this.setState({sensors: content, totalElements, totalPages})
+            if (this._isMounted) {
+                this.setState({sensors: content, totalElements, totalPages})
+            }
         })
     }
-
 
     setPageSensors = (event, page) => {
         const {text, pageSize} = this.state;
@@ -51,9 +61,13 @@ class Sensors extends React.Component {
         this.loadData(newPage, pageSize, text);
     };
 
-    create = () => {
-        this.props.history.push()
+    handleCreateSensor = () => {
+        this.props.history.push(getRouteForCreate(Routes.sensorEditor));
     };
+
+    handleUpdate = (id) => {
+        this.props.history.push(getRouteForUpdate(Routes.sensorEditor, id));
+    }
 
     onSearch = () => {
         const {text, pageSize} = this.state;
@@ -71,7 +85,9 @@ class Sensors extends React.Component {
             let pageValue = page;
             if ((page * pageSize) === (totalElements - 1) && ((page - 1) > -1)) {
                 pageValue = pageValue - 1;
+
                 this.setState({page: pageValue})
+
             }
             this.loadData(pageValue, pageSize, text);
         })
@@ -79,7 +95,8 @@ class Sensors extends React.Component {
 
     render() {
         let sensors = this.state.sensors.map((sensor) => {
-            return <Sensor onDelete={this.handleDeleteSensor} key={sensor.id} sensor={sensor}/>
+            return <Sensor onUpdate={this.handleUpdate} onDelete={this.handleDeleteSensor} key={sensor.id}
+                           sensor={sensor}/>
         })
         return (
             <div className='table'>
@@ -111,7 +128,7 @@ class Sensors extends React.Component {
                     <Grid item>
                         {
                             isAdmin(this.context.currentUser) ?
-                                <Button variant="contained" color="primary" onClick={this.create}>
+                                <Button variant="contained" color="primary" onClick={this.handleCreateSensor}>
                                     Create sensor
                                 </Button> : <></>
                         }

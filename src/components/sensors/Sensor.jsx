@@ -9,7 +9,7 @@ import {Delete, Edit} from "@material-ui/icons";
 import {AuthContext} from "../AuthProvider";
 import {isAdmin} from "../../constants/roles";
 
-export const Sensor = ({sensor, onDelete}) => {
+export const Sensor = ({sensor, onDelete,onUpdate}) => {
     const authContext = useContext(AuthContext);
     return (
         <>
@@ -17,7 +17,7 @@ export const Sensor = ({sensor, onDelete}) => {
                 <TableCell align="center">
                     {
                         isAdmin(authContext.currentUser) ?
-                            <IconButton>
+                            <IconButton onClick={()=>onUpdate(sensor.id)}>
                                 <Edit/>
                             </IconButton> : <React.Fragment/>
                     }

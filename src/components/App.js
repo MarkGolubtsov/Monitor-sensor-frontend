@@ -6,9 +6,9 @@ import {AuthContext} from "./AuthProvider";
 import {Redirect, Route} from "react-router";
 import Login from "./login/Login";
 import Sensors from "./sensors/Sensors";
-import {Editor} from "./edited/Editor";
 import {PrivateRouter} from "./PrivateRouter";
 import {OnlyGuestRouter} from "./OnlyGuestRouter";
+import Editor from "./edited/Editor";
 
 
 class App extends React.Component {
