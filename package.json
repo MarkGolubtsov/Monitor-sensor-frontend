@@ -12,7 +12,7 @@
     "axios": "^0.19.2",
     "jwt-decode": "^2.2.0",
     "material-ui-flat-pagination": "^4.1.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router": "^5.1.2",
